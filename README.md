@@ -34,16 +34,23 @@ To build the CS2 server Docker container, follow these steps:
 
 ## Running the CS2 Server
 
-Once you have built the Docker container, you can start the CS2 server by running the following command:
+1. Once you have built the Docker container, you can start the CS2 server container by running the following command:
 
-```bash
-docker run -it -p 27015:27015/tcp -p 27015:27015/udp -p 27020:27020/udp -p 27005:27005/udp -p 26900:26900/udp -e "login=INSERT_YOUR_LOGIN" cs2-server:arm64
-```
-
-Replace `INSERT_YOUR_LOGIN` with your actual Steam login credentials.
+   ```bash
+   docker run -it -p 27015:27015/tcp -p 27015:27015/udp -p 27020:27020/udp -p 27005:27005/udp -p 26900:26900/udp cs2-server:arm64
+   ```
+   
+2. To download server files and/or update run this:
+   
+   ```bash
+   FEXInterpreter ./steamcmd.sh +force_install_dir /opt/cs +login $login +app_update 730 validate +exit
+   ```
+3. To start the server:
+   ```bash
+   FEXInterpreter /opt/cs/game/bin/linuxsteamrt64/cs2 -dedicated +map de_dust2
+   ```
 
 - `-p` flag: This maps the necessary ports for the CS2 server to communicate over. Adjust these ports as needed.
-- `-e` flag: This allows you to pass your Steam login as an environment variable. Ensure you replace `INSERT_YOUR_LOGIN` with your actual Steam login.
 
 ## Note
 
