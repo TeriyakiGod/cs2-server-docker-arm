@@ -1,65 +1,51 @@
-# steamcmd-docker-arm64
+# Counter-Strike 2 Server (CS2) Docker Container for ARM64
 
-## [Get it from docker hub](https://hub.docker.com/r/teriyakigod/steamcmd)
-
-This repository provides a Docker image for running SteamCMD on ARM64 architecture. SteamCMD is a command-line utility that allows you to install and manage dedicated game servers via Steam.
+This repository contains a Dockerfile and instructions to build a Counter-Strike 2 (CS2) server using Docker on ARM64 devices. This allows you to easily set up and run a CS2 server on compatible ARM64 hardware.
 
 ## Prerequisites
 
-- A machine or environment with ARM64 architecture support.
-- Docker installed on your ARM64 system.
+Before you begin, ensure you have the following installed on your system:
 
-## Building the Docker Image
+- Docker: You can download and install Docker for your ARM64 device following the official Docker documentation.
 
-To build the Docker image, follow these steps:
+## Building the Docker Container
 
-1. Clone this repository to your local machine:
+To build the CS2 server Docker container, follow these steps:
 
-   ```bash
-   git clone https://github.com/your-username/steamcmd-docker-arm64.git
-   ```
-
-2. Navigate to the repository's directory:
+1. Clone this repository to your local system if you haven't already:
 
    ```bash
-   cd steamcmd-docker-arm64
+   git clone https://github.com/yourusername/cs2-server-docker-arm64.git
    ```
 
-3. Build the Docker image using the provided `Dockerfile`:
+2. Change your working directory to the cloned repository:
 
    ```bash
-   docker build -t steamcmd-arm64 .
+   cd cs2-server-docker-arm64
    ```
 
-   This command will build the Docker image named "steamcmd-arm64."
-
-## Running the SteamCMD Docker Container
-
-Once you've built the Docker image, you can run the SteamCMD container using the following steps:
-
-1. Run the SteamCMD container:
+3. Build the Docker container using the provided Dockerfile:
 
    ```bash
-   docker run -it steamcmd-arm64
+   docker build -t cs2-server:arm64 .
    ```
 
-   This command starts an interactive session inside the container.
-   When you start the container the steamcmd runs and updates immediately.
+## Running the CS2 Server
 
-3. You can now use SteamCMD within the container to install and manage game servers. For example:
+Once you have built the Docker container, you can start the CS2 server by running the following command:
 
-   ```bash
-   Steam> +login your_steam_username your_steam_password
-   ```
+```bash
+docker run -it -p 27015:27015/tcp -p 27015:27015/udp -p 27020:27020/udp -p 27005:27005/udp -p 26900:26900/udp -e "login=INSERT_YOUR_LOGIN" cs2-server:arm64
+```
 
-   Replace `your_steam_username` and `your_steam_password` with your actual Steam credentials.
+Replace `INSERT_YOUR_LOGIN` with your actual Steam login credentials.
 
-4. To exit the container when you're done, simply type `exit`.
+- `-p` flag: This maps the necessary ports for the CS2 server to communicate over. Adjust these ports as needed.
+- `-e` flag: This allows you to pass your Steam login as an environment variable. Ensure you replace `INSERT_YOUR_LOGIN` with your actual Steam login.
 
-5. If you need to make modifications to the container the root password is: `steamcmd`.
+## Note
 
-## Additional Information
-
-- [SteamCMD Documentation](https://developer.valvesoftware.com/wiki/SteamCMD)
-- [Docker Documentation](https://docs.docker.com/)
-- [Docker Hub Image](https://hub.docker.com/r/teriyakigod/steamcmd)
+- This Docker container is intended for use on ARM64 devices. Ensure your hardware is compatible before building and running the container.
+- The server will run in interactive mode (`-it`), which is useful for debugging and monitoring the server. You can detach from the container by pressing `Ctrl + P` followed by `Ctrl + Q`.
+- Make sure you have the necessary SteamCMD login credentials to download and update the CS2 server files.
+- You may want to customize the server settings and configurations according to your preferences. Check the CS2 server documentation for more details.
