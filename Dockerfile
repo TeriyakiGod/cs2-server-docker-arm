@@ -90,8 +90,6 @@ WORKDIR /home/steam/Steam
 # Download and run SteamCMD
 RUN curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" | tar zxvf -
 
-ENV login=""
-
 COPY steam-update.txt /home/steam/
 
 RUN FEXInterpreter ./steamcmd.sh +quit
