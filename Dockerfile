@@ -112,4 +112,4 @@ EXPOSE 26900/udp
 
 WORKDIR /home/steam/Steam
 
-ENTRYPOINT FEXInterpreter ./steamcmd.sh +force_install_dir /opt/cs +login $login +app_update 730 validate +exit && FEXInterpreter /opt/cs/game/bin/linuxsteamrt64/cs2 -dedicated +map de_dust2
+ENTRYPOINT /bin/bash
