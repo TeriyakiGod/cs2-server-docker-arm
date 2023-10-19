@@ -1,0 +1,5 @@
+// steam_update.txt
+//
+@ShutdownOnFailedCommand 1 //set to 0 if updating multiple servers at once
+@NoPromptForPassword 1
+quit

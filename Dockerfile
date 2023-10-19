@@ -67,6 +67,8 @@ USER root
 
 RUN echo 'root:steamcmd' | chpasswd
 
+RUN mkdir /opt/cs && chown steam:steam /opt/cs
+
 USER steam
 
 WORKDIR /home/steam/.fex-emu/RootFS/
@@ -88,4 +90,26 @@ WORKDIR /home/steam/Steam
 # Download and run SteamCMD
 RUN curl -sqL "https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz" | tar zxvf -
 
-ENTRYPOINT FEXBash ./steamcmd.sh
+ENV login=""
+
+COPY steam-update.txt /home/steam/
+
+RUN FEXInterpreter ./steamcmd.sh +quit
+
+WORKDIR /home/steam/.steam/sdk64
+
+RUN cp /home/steam/Steam/linux64/steamclient.so ./
+
+WORKDIR /home/steam/.steam/sdk32
+
+RUN cp /home/steam/Steam/linux32/steamclient.so ./
+
+EXPOSE 27015/tcp
+EXPOSE 27015/udp
+EXPOSE 27020/udp
+EXPOSE 27005/udp
+EXPOSE 26900/udp
+
+WORKDIR /home/steam/Steam
+
+ENTRYPOINT FEXInterpreter ./steamcmd.sh +force_install_dir /opt/cs +login $login +app_update 730 validate +exit && FEXInterpreter /opt/cs/game/bin/linuxsteamrt64/cs2 -dedicated +map de_dust2
