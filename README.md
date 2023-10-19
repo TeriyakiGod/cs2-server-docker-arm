@@ -1,5 +1,7 @@
 # Counter-Strike 2 Server (CS2) Docker Container for ARM64
 
+## [Docker Image](https://hub.docker.com/r/teriyakigod/cs2-server)
+
 This repository contains a Dockerfile and instructions to build a Counter-Strike 2 (CS2) server using Docker on ARM64 devices. This allows you to easily set up and run a CS2 server on compatible ARM64 hardware.
 
 ## Prerequisites
