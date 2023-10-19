@@ -43,7 +43,7 @@ To build the CS2 server Docker container, follow these steps:
 2. To download server files and/or update run this:
    
    ```bash
-   FEXInterpreter ./steamcmd.sh +force_install_dir /opt/cs +login $login +app_update 730 validate +exit
+   FEXInterpreter ./steamcmd.sh +force_install_dir /opt/cs +login your_login +app_update 730 validate +exit
    ```
 3. To start the server:
    ```bash
